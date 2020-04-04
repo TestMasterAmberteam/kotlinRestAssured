@@ -1,4 +1,4 @@
-package pl.amberteam;
+package pl.amberteam.data;
 
 public class TrainingJavaModel {
     public String getName() {

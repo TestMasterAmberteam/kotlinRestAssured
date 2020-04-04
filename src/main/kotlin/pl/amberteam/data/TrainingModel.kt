@@ -1,4 +1,4 @@
-package pl.amberteam
+package pl.amberteam.data
 
 data class TrainingModel(
     var name: String,
