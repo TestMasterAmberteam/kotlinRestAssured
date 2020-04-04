@@ -1,6 +1,6 @@
 package pl.amberteam
 
-class TrainingModel(
+data class TrainingModel(
     var name: String,
     var place: String,
     var price: Int,
