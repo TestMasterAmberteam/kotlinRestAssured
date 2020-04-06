@@ -1,9 +1,9 @@
 package pl.amberteam.data
 
 data class TrainingModel(
-    var name: String,
-    var place: String,
-    var price: Int,
-    var trainer: String,
-    var maxParticipants: Int
+    val name: String,
+    val place: String,
+    val price: Int,
+    val trainer: String,
+    val maxParticipants: Int
 )

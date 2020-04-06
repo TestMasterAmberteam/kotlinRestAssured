@@ -1,6 +1,12 @@
 package pl.amberteam.data;
 
 public class TrainingJavaModel {
+    private String name;
+    private String place;
+    private int price;
+    private String trainer;
+    private int maxParticipants;
+
     public String getName() {
         return name;
     }
@@ -46,9 +52,5 @@ public class TrainingJavaModel {
         return this;
     }
 
-    private String name;
-    private String place;
-    private int price;
-    private String trainer;
-    private int maxParticipants;
+
 }
