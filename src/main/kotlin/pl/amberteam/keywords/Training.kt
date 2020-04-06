@@ -9,8 +9,10 @@ import io.restassured.response.Response
 import pl.amberteam.data.TrainingModel
 
 class Training {
-    fun add(trainingModel: TrainingModel): Response {
-        return Given {
+    lateinit var response: Response
+
+    fun add(trainingModel: TrainingModel): Training {
+        response = Given {
             contentType(ContentType.JSON)
             body(trainingModel)
         } When {
@@ -21,11 +23,11 @@ class Training {
         } Extract {
             response()
         }
-
+        return this
     }
 
-    fun checkByQueryParam(trainingId: String): Response {
-        return Given {
+    fun checkByQueryParam(trainingId: String): Training {
+        response = Given {
             param("id", trainingId)
         } When {
             get("/training")
@@ -35,11 +37,11 @@ class Training {
         } Extract {
             response()
         }
-
+        return this
     }
 
-    fun edit(trainingId: String, trainingModel: TrainingModel): Response {
-        return Given {
+    fun edit(trainingId: String, trainingModel: TrainingModel): Training {
+        response = Given {
             pathParam("id", trainingId)
             contentType(ContentType.JSON)
             body(trainingModel)
@@ -52,5 +54,6 @@ class Training {
         } Extract {
             response()
         }
+        return this
     }
 }

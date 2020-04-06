@@ -66,9 +66,8 @@ class TrainingKotlinTest {
                 price = 0,
                 place = "web"
             )
-
-        val newTrainingId = training.add(newTraining).jsonPath().getString("id")
-        val nameOnResponse = training.checkByQueryParam(newTrainingId).jsonPath().getString("name")
+        val trainingId = training.add(newTraining).response.jsonPath().getString("id")
+        val nameOnResponse = training.checkByQueryParam(trainingId).response.jsonPath().getString("name")
         assertEquals(newTraining.name, nameOnResponse)
     }
 
@@ -85,11 +84,13 @@ class TrainingKotlinTest {
                 place = "web"
             )
         val editedTraining = newTraining.copy(name = "po edycji")
-        val trainingId: String = training.add(newTraining).jsonPath().getString("id")
-        training.checkByQueryParam(trainingId)
-        training.edit(trainingId, editedTraining)
-        training.checkByQueryParam(trainingId)
-        val nameOnResponse = training.checkByQueryParam(trainingId).jsonPath().getString("name")
+        val trainingId = training.add(newTraining).response.jsonPath().getString("id")
+        val nameOnResponse = training
+            .checkByQueryParam(trainingId)
+            .edit(trainingId, editedTraining)
+            .checkByQueryParam(trainingId)
+            .response.jsonPath().getString("name")
+
         assertEquals(editedTraining.name, nameOnResponse)
 
     }
