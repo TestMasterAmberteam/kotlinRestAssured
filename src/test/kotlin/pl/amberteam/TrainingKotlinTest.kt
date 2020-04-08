@@ -1,16 +1,11 @@
 package pl.amberteam
 
 
-import io.restassured.RestAssured.*
-import io.restassured.http.ContentType
-
-
 import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
 
 
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import pl.amberteam.data.TrainingModel
@@ -18,35 +13,15 @@ import pl.amberteam.keywords.Training
 import kotlin.test.assertEquals
 
 
-class TrainingKotlinTest {
-    companion object {
-        private const val apiVersion = "1"
-        private val training: Training = Training()
+class TrainingKotlinTest : BaseTest() {
+    private val training: Training = Training()
 
-        @BeforeAll
-        @JvmStatic
-        fun setup() {
-            baseURI = "http://localhost"
-            basePath = "/api/rest/v${apiVersion}/"
-            port = 9999
-
-        }
-    }
-
-
-//    private val apiVersion = "1"
-//
-//    @BeforeEach
-//    fun setup() {
-//        baseURI = "http://localhost"
-//        basePath = "/api/rest/v${apiVersion}/"
-//        port = 9999
-//    }
 
     @Test
+    @DisplayName("Test pobierania szkoleń")
     fun getAllTrainings() {
         Given {
-            contentType(ContentType.JSON)
+            given()
         } When {
             get("/trainings/all")
         } Then {
