@@ -1,5 +1,7 @@
 package pl.amberteam.keywords
 
+import io.restassured.config.LogConfig
+import io.restassured.config.RestAssuredConfig
 import io.restassured.http.ContentType
 import io.restassured.module.kotlin.extensions.Extract
 import io.restassured.module.kotlin.extensions.Given
@@ -54,6 +56,31 @@ class Training {
         } Extract {
             response()
         }
+        return this
+    }
+
+    fun delete(trainingId: String): Training {
+        Given {
+            pathParam("id", trainingId)
+        } When {
+            delete("training/{id}")
+        } Then {
+            statusCode(200)
+        }
+        return this
+    }
+
+    fun checkDeletedPathParams(trainingId: String): Training {
+        Given {
+            pathParam("id", trainingId)
+            config(RestAssuredConfig.config().logConfig(LogConfig.logConfig().blacklistHeader("Content-Type")))
+        } When {
+            get("/training/{id}")
+        } Then {
+            statusCode(404)
+            log().all()
+        }
+
         return this
     }
 }

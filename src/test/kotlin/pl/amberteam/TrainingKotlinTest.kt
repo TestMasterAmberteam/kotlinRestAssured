@@ -69,4 +69,25 @@ class TrainingKotlinTest : BaseTest() {
         assertEquals(editedTraining.name, nameOnResponse)
 
     }
+
+    @Test
+    @DisplayName("usuwamy keczupem")
+    fun deleteTraining() {
+        val trainingModel = TrainingModel(
+            name = "usuwanie",
+            trainer = "GH",
+            maxParticipants = 100,
+            price = 0,
+            place = "amberteamtesting online"
+        )
+
+        val trainingId = training.add(trainingModel).response.jsonPath().getString("id")
+
+        training
+            .checkByQueryParam(trainingId)
+            .delete(trainingId)
+            .checkDeletedPathParams(trainingId)
+
+
+    }
 }

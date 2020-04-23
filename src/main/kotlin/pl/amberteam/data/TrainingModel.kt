@@ -4,6 +4,6 @@ data class TrainingModel(
     val name: String,
     val place: String,
     val price: Int,
-    val trainer: String,
+    val trainer: String?,
     val maxParticipants: Int
 )
